@@ -60,8 +60,14 @@ node.append("circle")
     .attr("r", function(d) { return d.radius; })
     .style("fill", "transparent");
 
+function pick_pill(){
+  var i = ~~(Math.random()*4)
+  return "pill" + i + ".png";
+}
+
+
 node.append("image")
-    .attr("xlink:href", function(d){return "pill0.png"})
+    .attr("xlink:href", pick_pill)
     .attr("x", function(d){return d.x - d.radius})
     .attr("y", function(d){return d.y - d.radius})
     .attr("width", function(d){return 2* d.radius})
