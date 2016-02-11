@@ -18,15 +18,15 @@ var width = window.innerWidth || e.clientWidth || g.clientWidth,
     height = window.innerHeight || e.clientHeight|| g.clientHeight;
 
 var nodes = d3.range(200).map(function() { return {radius: Math.random() * 24 + 4}; }),
-    root = nodes[0],
-    color = d3.scale.category10();
+    root = nodes[0]
+    // color = d3.scale.category10();
 
 root.radius = 0;
 root.fixed = true;
 
 var force = d3.layout.force()
-    .gravity(0.05)
-    .charge(function(d, i) { return i ? 0 : -2000; })
+    .gravity(0.03)
+    .charge(function(d, i) { return i ? 0 : -1000; })
     .nodes(nodes)
     .size([width, height]);
 
@@ -51,13 +51,14 @@ var node = svg.selectAll(".node")
           .data(nodes.slice(1))
             .enter()
             .append("g")
-            .attr("class", "node");
+            // .attr("class", "node");
 
     
 node.append("circle")
     // .data(nodes.slice(1))
     // .enter()
     .attr("r", function(d) { return d.radius; })
+    .attr("class", "node")
     .style("fill", "transparent");
 
 function pick_pill(){
@@ -70,8 +71,8 @@ node.append("image")
     .attr("xlink:href", pick_pill)
     .attr("x", function(d){return d.x - d.radius})
     .attr("y", function(d){return d.y - d.radius})
-    .attr("width", function(d){return 2* d.radius})
-    .attr("height", function(d){return 2*d.radius});
+    .attr("width", function(d){return 2* d.radius-2})
+    .attr("height", function(d){return 2*d.radius-2});
     // .append("image")
     // .attr("xlink:href", "https://github.com/favicon.ico")
     //   .attr("x", -8)
